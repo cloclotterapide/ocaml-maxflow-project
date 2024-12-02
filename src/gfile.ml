@@ -78,6 +78,29 @@ let read_comment graph line =
     Printf.printf "Unknown line:\n%s\n%!" line ;
     failwith "from_file"
 
+
+
+let export graph path =
+
+  (* Open a write-file. *)
+  let ff = open_out path in
+
+  (* Write in this file. *)
+  fprintf ff "digraph finite_state_machine {\n
+  fontname=\"Helvetica,Arial,sans-serif\"\n
+	node [fontname=\"Helvetica,Arial,sans-serif\"]\n
+	edge [fontname=\"Helvetica,Arial,sans-serif\"]\n
+	rankdir=LR;\nnode [shape = circle];" ;
+
+  (* Write all arcs *)
+  let _ = e_fold graph (fun count arc -> fprintf ff "%d -> %d [label = \"%s\"];\n" arc.src arc.tgt arc.lbl ; count + 1) 0 in
+  
+  fprintf ff "}\n" ;
+  
+  close_out ff ;
+  ()
+
+
 let from_file path =
 
   let infile = open_in path in

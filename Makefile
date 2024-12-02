@@ -20,6 +20,8 @@ edit:
 demo: build
 	@echo "\n   ⚡  EXECUTING  ⚡\n"
 	./ftest.exe graphs/${graph} $(src) $(dst) outfile
+	dot -Tsvg outfile > graphe.svg
+	firefox graphe.svg
 	@echo "\n   🥁  RESULT (content of outfile)  🥁\n"
 	@cat outfile
 
