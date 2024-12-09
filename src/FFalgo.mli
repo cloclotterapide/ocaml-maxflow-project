@@ -1,9 +1,13 @@
 open Graph
-open Tools
 
-type flow = (int,int)
+val find_path :int graph -> id -> id -> int arc list
 
-type ffgraph = flow graph
+val print_path :'a arc list -> unit
 
-let fordfulkerson gr =
-  
+val min_list : int Graph.arc list -> int
+
+val update_path : id graph -> id -> 'a arc list -> id graph
+
+val ffalgo : id graph -> id -> id -> id graph
+
+val solution : id graph -> id graph -> id graph

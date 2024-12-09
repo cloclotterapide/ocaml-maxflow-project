@@ -1,8 +1,8 @@
 .PHONY: all build format edit demo clean
 
 src?=0
-dst?=5
-graph?=graph1.txt
+dst?=9
+graph?=graph7.txt
 
 all: build
 
@@ -23,7 +23,7 @@ demo: build
 	dot -Tsvg outfile > graphe.svg
 	firefox graphe.svg
 	@echo "\n   🥁  RESULT (content of outfile)  🥁\n"
-	@cat outfile
+	 
 
 clean:
 	find -L . -name "*~" -delete
