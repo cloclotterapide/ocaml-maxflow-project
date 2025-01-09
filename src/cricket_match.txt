@@ -1,0 +1,13 @@
+mi 83 
+csk 80
+kkr 78
+dc 77
+
+games
+
+mi csk 1
+mi kkr 6
+mi  dc 1
+csk dc 2
+
+
