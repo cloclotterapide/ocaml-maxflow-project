@@ -3,7 +3,7 @@ csk 80
 kkr 78
 dc 77
 
-games
+matches
 
 mi csk 1
 mi kkr 6

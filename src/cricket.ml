@@ -6,32 +6,32 @@ type team =
   {name : String;
   win : int}
 
+type match =
+  {team1 : String;
+  team2 : String;
+  remaining : int}
 
-(* Reads a line with a node. *)
+(* Reads teams *)
 let read_wins team_list line =
   try Scanf.sscanf line "%s %d " (fun tname twin -> team_list = {name=tname;win=twin}::team_list)
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
 
-(* Ensure that the given node exists in the graph. If not, create it. 
- * (Necessary because the website we use to create online graphs does not generate correct files when some nodes have been deleted.) *)
-let ensure graph id = if node_exists graph id then graph else new_node graph id
 
-(* Reads a line with an arc. *)
-let read_matchs graph line =
+(* Reads matches *)
+let read_matchs matches_list line =
   try Scanf.sscanf line "%s %s %d"
-        (fun src tgt lbl -> let lbl = String.trim lbl in new_arc (ensure (ensure graph src) tgt) { src ; tgt ; lbl } )
+        (fun team1 team2 rm -> matches_list = {team1=team1;team2=team2;remaining=rm}::matches_list)
   with e ->
     Printf.printf "Cannot read arc in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
 
 (* Reads a comment or fail. *)
-let read_comment graph line =
-  try Scanf.sscanf line " %%" graph
+let read_switch switch line =
+  try Scanf.sscanf line " %s" = fun(switch -> switch = true)
   with _ ->
     Printf.printf "Unknown line:\n%s\n%!" line ;
-    failwith "from_file"
 
 
 
