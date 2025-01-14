@@ -1,5 +1,5 @@
 open Graph
-
+open Tools
 let find_path gr idsrc iddest =
   let rec find_path_acu idsrc acu = if idsrc = iddest then acu else 
     let arc_list = (out_arcs gr idsrc) in (*retirer les elements qui sont deja dans l'acu pour retirer les boucles*)
@@ -29,8 +29,8 @@ in min_list_acu max_int path
 
 let rec update_path gr min = function
 |[]-> gr
-|arc::rest -> let gr = Tools.add_arc gr arc.src arc.tgt (-min) in  
-              let gr = Tools.add_arc gr arc.tgt arc.src min in
+|arc::rest -> let gr = add_arc gr arc.src arc.tgt (-min) in  
+              let gr = add_arc gr arc.tgt arc.src min in
               update_path gr min rest
 
 
@@ -39,8 +39,8 @@ let rec ffalgo gr idsrc iddest = match (find_path gr idsrc iddest) with
   |path -> Printf.printf " min : %d \n%!" (min_list path);ffalgo (update_path gr (min_list path) path) idsrc iddest
 
 
-
-let solution gri gre =
+(*gri is the initial graph and gre is the residual graph*)
+let solution gri gre = 
 let aux ngr arci = match (find_arc gre arci.src arci.tgt) with
   |None -> assert false
   |Some arce -> if arce.lbl < arci.lbl then Tools.add_arc ngr arci.src arci.tgt (arci.lbl - arce.lbl) else ngr

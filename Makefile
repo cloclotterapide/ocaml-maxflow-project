@@ -3,7 +3,7 @@
 src?=-1
 dst?=-2
 graph?=cricket_match1.txt
-state?=1
+state?=1 #0 for the graph before ford fulkerson is applied and 1 for after
 
 all: build
 

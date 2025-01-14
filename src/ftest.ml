@@ -42,7 +42,7 @@ let () =
   let () = export cricket_final outfile in 
   
   ()
-  (*
+  (*Not applied to cricket file
   (* Open file *)
   let graph = from_file infile in
 

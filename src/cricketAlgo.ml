@@ -20,6 +20,7 @@ let rec add_teams_aux graph selected_team_name game_list team_list_full = functi
   | [] -> graph
   | {name=name;win=_;id=id}::rest -> if name = selected_team_name then add_teams_aux graph selected_team_name game_list team_list_full rest else
       let graph = new_node graph id in
+      (*Arcs between the sink the other teams and the sink node*)
       let graph = add_arc graph id (-2) ((get_win  selected_team_name team_list_full ) + (get_remaining selected_team_name game_list) - (get_win name team_list_full)) in
       add_teams_aux graph selected_team_name game_list team_list_full rest
 
@@ -55,12 +56,13 @@ let rec add_game_team_arcs graph selected_team team_list = function
 
 
 let cricketGraph cricket_data = 
+  (*Initialisation*)
   let selected_team_name = cricket_data.selected_team in
   let team_list = cricket_data.team_list in
   let game_list = cricket_data.game_list in
   let graph = empty_graph in
 
-  (*source and dest nodes*)
+  (*source and destination nodes*)
   let graph = new_node graph (-1) in
   let graph = new_node graph (-2) in
         
