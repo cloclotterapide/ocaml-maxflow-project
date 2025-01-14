@@ -21,14 +21,15 @@ type cricket_data ={
 
 (* Reads teams *)
 let read_wins team_list line =
-  try Scanf.sscanf line "t %s %d " (fun tname twin -> {name=tname;win=twin;id=((List.length team_list) + 1)}::team_list)
+  try Scanf.sscanf line "t %s %d " (fun tname twin -> {name=tname;win=twin;id=((List.length team_list)+1)}::team_list)
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
 
 
+(*a tester*)
 let rec get_team_from_name name = function
-  |[] ->{name="no team with this name";win=(-100);id=(-100)} 
+  |[] ->{name="no team with name";win=(-100);id=(-100)} 
   |team::rest -> if team.name = name then team else get_team_from_name name rest
 
 (* Reads games *)
@@ -45,7 +46,6 @@ let read_selected_team line =
   with e ->
     Printf.printf "Cannot read arc in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
-
 
 let read_cricket_file path =
     let infile = open_in path in
@@ -72,3 +72,20 @@ let read_cricket_file path =
   
   close_in infile ;
   final_cricket_data
+
+
+(* Show function for 'team' type *)
+let show_team t =
+  Printf.sprintf "Team Name: %s, Wins: %d, ID: %d" t.name t.win t.id
+
+(* Show function for 'game' type *)
+let show_game g =
+  Printf.sprintf "Game: %s vs %s, Remaining: %d"
+    g.team1.name g.team2.name g.remaining
+
+(* Show function for 'cricket_data' type *)
+let show_cricket_data data =
+  let teams_str = String.concat "\n" (List.map show_team data.team_list) in
+  let games_str = String.concat "\n" (List.map show_game data.game_list) in
+  Printf.printf "Teams:\n%s\nGames:\n%s\nSelected Team: %s"
+    teams_str games_str data.selected_team

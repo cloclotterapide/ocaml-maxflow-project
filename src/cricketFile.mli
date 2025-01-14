@@ -31,3 +31,9 @@ val read_selected_team : selected_team -> selected_team
 
 (* Reads the entire cricket file and builds the cricket data structure *)
 val read_cricket_file : string -> cricket_data
+
+val show_team : team -> string
+
+val show_game : game -> string
+
+val show_cricket_data : cricket_data -> unit

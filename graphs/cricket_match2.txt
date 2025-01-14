@@ -1,9 +1,10 @@
 %% Wins for each team
-
-t mi 83 
+ 
+t dc 77
+t mi 83
 t csk 80
 t kkr 78
-t dc 77
+
 
 %% Remaining matches
 
@@ -14,4 +15,4 @@ r csk dc 2
 
 %% Chosen team
 
-s csk
+s kkr

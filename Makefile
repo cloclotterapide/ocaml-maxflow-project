@@ -2,7 +2,8 @@
 
 src?=-1
 dst?=-2
-graph?=cricket_match.txt
+graph?=cricket_match1.txt
+state?=1
 
 all: build
 
@@ -19,11 +20,11 @@ edit:
 
 demo: build
 	@echo "\n   ⚡  EXECUTING  ⚡\n"
-	./ftest.exe graphs/${graph} $(src) $(dst) outfile
+	./ftest.exe graphs/${graph} $(src) $(dst) outfile $(state)
 	dot -Tsvg outfile > graphe.svg
 	firefox graphe.svg
 	@echo "\n   🥁  RESULT (content of outfile)  🥁\n"
-	 
+
 
 clean:
 	find -L . -name "*~" -delete

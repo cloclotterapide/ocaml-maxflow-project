@@ -6,7 +6,7 @@ open CricketFile
 
 let () =
   (* Check the number of command-line arguments *)
-  if Array.length Sys.argv <> 5 then
+  if Array.length Sys.argv <> 6 then
     begin
       Printf.printf
         "\n ✻  Usage: %s infile source sink outfile\n\n%s%!" Sys.argv.(0)
@@ -29,15 +29,17 @@ let () =
   in
 
   let cricket_data = read_cricket_file infile in
+  let () = show_cricket_data cricket_data in
+
   let cricket_graph = cricketGraph cricket_data in
+  
+  let cricket_final = if Sys.argv.(5) = "1" then solution cricket_graph (ffalgo cricket_graph (-1) (-2)) else cricket_graph in 
 
-  let cricket_graph = solution cricket_graph (ffalgo cricket_graph (-1) (-2)) in
-
-  let cricket_graph = gmap cricket_graph (fun x-> string_of_int x)  in
+  let cricket_final = gmap cricket_final (fun x-> string_of_int x)  in
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile cricket_graph in
+  let () = write_file outfile cricket_final in
 
-  let () = export cricket_graph outfile in
+  let () = export cricket_final outfile in 
   
   ()
   (*
