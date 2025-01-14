@@ -1,6 +1,8 @@
 open Gfile
 open Tools
 open FFalgo
+open CricketAlgo
+open CricketFile
 
 let () =
   (* Check the number of command-line arguments *)
@@ -26,6 +28,19 @@ let () =
   and _sink = int_of_string Sys.argv.(3)
   in
 
+  let cricket_data = read_cricket_file infile in
+  let cricket_graph = cricketGraph cricket_data in
+
+  let cricket_graph = solution cricket_graph (ffalgo cricket_graph (-1) (-2)) in
+
+  let cricket_graph = gmap cricket_graph (fun x-> string_of_int x)  in
+  (* Rewrite the graph that has been read. *)
+  let () = write_file outfile cricket_graph in
+
+  let () = export cricket_graph outfile in
+  
+  ()
+  (*
   (* Open file *)
   let graph = from_file infile in
 
@@ -50,4 +65,4 @@ let () =
   let () = export graph outfile in
 
   ()
-
+ *)

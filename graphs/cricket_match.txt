@@ -14,4 +14,4 @@ r csk dc 2
 
 %% Chosen team
 
-s mi
+s csk
